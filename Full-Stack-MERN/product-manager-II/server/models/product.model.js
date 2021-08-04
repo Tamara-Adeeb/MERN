@@ -9,7 +9,7 @@ const ProductCollection = new mongoose.Schema({
         ],
         trim: true,
         minLength:3},
-    price:{
+    price:{ 
         type:String,
         required: [
             true,
@@ -28,4 +28,4 @@ const ProductCollection = new mongoose.Schema({
 
 }, {timestamps:true})
 
-module.exports.Product = mongoose.model('Product',ProductCollection);
+module.exports.Product = mongoose.model('Product',ProductCollection);   

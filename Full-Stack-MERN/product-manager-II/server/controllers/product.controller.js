@@ -8,7 +8,10 @@ module.exports.createProduct = (request,response) => {
         description
     })
     .then(product => response.json(product))
-    .catch(error => response.json(error));
+    .catch(error => {
+        console.log(error)
+        response.json(error)
+    });
 }
 
 module.exports.findAllProducts = (request,response) => {
@@ -24,14 +27,13 @@ module.exports.findOneProduct = (request,response) => {
 }
 
 module.exports.deleteProduct = (request,responce) => {
-    Product.deleteOne({_id:request.body})
+    Product.deleteOne({_id:request.params.id})
     .then(result => responce.json({ result: result }))
     .catch(err => responce.json({ message: 'Something went wrong', error: err }));
 }
 
-module.exports.updateProduct = (request,responce) => {
-    const { product_id,product } = request.body;
-    Product.findOneAndUpdate({ _id: product_id },product, { new: true, runValidators: true })
-    .then(updatedUser => res.json({ user: updatedUser }))
-    .catch(err => res.json({ message: 'Something went wrong', error: err }));
+module.exports.updateProduct = (request, response) => {
+    Product.findOneAndUpdate({_id: request.body.id}, request.body, {new:true})
+        .then(updatedProduct => response.json(updatedProduct))
+        .catch(err => response.json(err))
 }

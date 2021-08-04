@@ -3,21 +3,26 @@ import axios from'axios';
 import ProductForm from '../Presentational-Components/ProductForm';
 import ProductDetail from '../Presentational-Components/ProductDetail';
 
-const UpdateProduct = ({product_id}) => {
+const UpdateProduct = props => {
+    const { id } = props;
     const [product,setProduct] = useState('');
+    const [price,setPrice] = useState('');
+    const [description,setDescription] = useState('');
+
     const [isLoaded,setIsLoaded] = useState(false);
 
     useEffect(()=>{
-        axios.get(`http://localhost:8000/api/${product_id}`)
+        axios.get(`http://localhost:8000/api/${id}`)
         .then(responce => {
             setProduct(responce.data)
             setIsLoaded(true);
         })
     }, [])
 
-    const updateProduct = editedProduct => {
-        axios.put('http://localhost:8000/api/product',{product_id,editedProduct})
-        
+    const updateProduct = (products) => {
+        products.id = id;
+        axios.put('http://localhost:8000/api/product/'+id, products)
+            .then(res => console.log(res));
     }
     return (
         <div>

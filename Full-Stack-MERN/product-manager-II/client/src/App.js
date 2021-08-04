@@ -1,6 +1,6 @@
 
 import './App.css';
-import { Router } from 'express';
+import { Router } from '@reach/router';
 import CreateComponent from './Container-Components/CreateComponent';
 import UpdateProduct from './Container-Components/UpdateProduct';
 import ProductDetail from './Presentational-Components/ProductDetail';

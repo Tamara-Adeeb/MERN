@@ -1,13 +1,16 @@
 import React,{useState} from 'react'
 
 const ProductForm = props => {
-    const [title,setTitle] = useState(props.ptitle);
-    const[price,setPrice] = useState(props.pprice);
-    const[description,setDescription] = useState(props.pdescription);
+    const [title,setTitle] = useState(props.titlep);
+    const[price,setPrice] = useState(props.pricep);
+    const[description,setDescription] = useState(props.descriptionp);
 
     const handelSubmit = e =>{
         e.preventDefault();
         props.onSubmit({title,price,description})
+        setTitle("");
+        setPrice("");
+        setDescription("");
     }
 
     return (

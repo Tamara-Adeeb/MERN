@@ -4,7 +4,7 @@ import axios from 'axios';
 import ProductList from '../Presentational-Components/ProductList';
 
 const CreateComponent = props => {
-    const [products,setProducts] = useState({});
+    const [products,setProducts] = useState([]);
     const [isLoaded,setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -17,9 +17,12 @@ const CreateComponent = props => {
     })
 
     const createProduct = product => {
-        axios.post('http://localhost:8000/api/product',product)
-        .then(responce => console.log(responce.data))
-        .catch(error => console.log(error.message))
+        axios.post('http://localhost:8000/api/products',product)
+        .then(responce => {
+            console.log(responce);
+            setIsLoaded(true);
+        })
+        .catch(error => console.log("asdasd"+error.message))
     }
 
     return (
